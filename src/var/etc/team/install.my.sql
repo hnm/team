@@ -1,67 +1,93 @@
--- phpMyAdmin SQL Dump
--- version 3.5.2.2
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Erstellungszeit: 13. Nov 2014 um 20:51
--- Server Version: 5.5.27
--- PHP-Version: 5.4.7
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Datenbank: `kader-schule-zuerich`
---
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur f�r Tabelle `team`
---
-
-DROP TABLE IF EXISTS `team`;
 CREATE TABLE IF NOT EXISTS `team` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `order_index` int(10) unsigned NOT NULL,
+  `order_index` int(10) unsigned DEFAULT NULL,
+  `online` tinyint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8  ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `team_ci_team_member` (
+  `id` int(11) NOT NULL,
+  `team_member_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `team_ci_team_member_index_1` (`team_member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Tabellenstruktur f�r Tabelle `team_member`
---
+CREATE TABLE IF NOT EXISTS `team_controller_page_config` (
+  `id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `team_member`;
+CREATE TABLE IF NOT EXISTS `team_controller_page_config_teams` (
+  `team_controller_page_config_id` int(10) unsigned NOT NULL,
+  `team_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`team_controller_page_config_id`,`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `team_member` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL,
-  `function` varchar(128) DEFAULT NULL,
-  `description_html` text,
-  `file_image` varchar(64) DEFAULT NULL,
-  `phone` varchar(32) DEFAULT NULL,
-  `email` varchar(128) DEFAULT NULL,
-  `order_index` int(10) unsigned NOT NULL,
-  `team_id` int(10) unsigned NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `file_image` varchar(255) DEFAULT NULL,
+  `order_index` int(10) unsigned DEFAULT NULL,
+  `online` tinyint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `team_controller_page_config_teams`;
-CREATE TABLE `team_controller_page_config_teams` (
-	`team_controller_page_config_id` INT UNSIGNED NOT NULL,
-	`team_id` INT UNSIGNED NOT NULL,
-	PRIMARY KEY (`team_controller_page_config_id`, `team_id`)
-)
-COLLATE='utf8_general_ci'
-ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS `team_member_page_controller` (
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `team_controller_page_config`;
-CREATE TABLE `team_controller_page_config` (
-	`id` INT UNSIGNED NOT NULL,
-	PRIMARY KEY (`id`)
-)
-COLLATE='utf8_general_ci'
-ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS `team_member_page_controller_team_members` (
+  `team_member_page_controller_id` int(10) unsigned NOT NULL,
+  `team_member_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`team_member_page_controller_id`,`team_member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `team_member_t` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `n2n_locale` varchar(12) DEFAULT NULL,
+  `team_member_id` int(10) unsigned DEFAULT NULL,
+  `function` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `team_member_t_index_1` (`team_member_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `team_member_teams` (
+  `team_member_id` int(10) unsigned NOT NULL,
+  `team_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`team_member_id`,`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `team_page_controller` (
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `team_page_controller_teams` (
+  `team_page_controller_id` int(10) unsigned NOT NULL,
+  `team_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`team_page_controller_id`,`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `team_t` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `n2n_locale` varchar(12) DEFAULT NULL,
+  `team_id` int(10) unsigned DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` text,
+  PRIMARY KEY (`id`),
+  KEY `team_t_index_1` (`team_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
