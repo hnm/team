@@ -17,8 +17,8 @@ class TeamDao implements RequestScoped {
 	 * @return Team[]
 	 */
 	public function getTeams() {
-		return $this->em->createSimpleCriteria(Team::getClass(), null, 
-				array('orderIndex' => 'ASC', 'online' => true))->toQuery()->fetchArray();
+		return $this->em->createSimpleCriteria(Team::getClass(), ['online' => true], 
+				['orderIndex' => 'ASC', ])->toQuery()->fetchArray();
 	}
 	
 	/**
