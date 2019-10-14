@@ -30,8 +30,6 @@ class TeamController extends ControllerAdapter {
 	}
 
 	public function setTeams($teams = null) {
-		ArgUtils::valArrayLike($teams, Team::getClass(), true);
-		
 		$this->teams = $teams;
 	}
 
@@ -40,8 +38,6 @@ class TeamController extends ControllerAdapter {
 	}
 
 	public function setTeamMembers($teamMembers = null) {
-		ArgUtils::valArrayLike($teamMembers, TeamMember::getClass(), true);
-		
 		$this->teamMembers = $teamMembers;
 	}
 
@@ -60,7 +56,6 @@ class TeamController extends ControllerAdapter {
 
 	public function index() {
 		if (null !== $this->teams) {
-			test($this->teams);
 			$this->teams();
 			return;
 		}
