@@ -473,7 +473,7 @@
             "dataSourceName": null,
             "label": "Team-Seite",
             "pluralLabel": "Team-Seiten",
-            "iconType": null,
+            "iconType": "fa fa-users",
             "props": [],
             "commands": [],
             "partialControlOrder": [],
@@ -486,7 +486,7 @@
             "dataSourceName": null,
             "label": "Mitarbeiter-Seite",
             "pluralLabel": "Mitarbeiter-Seite",
-            "iconType": null,
+            "iconType": "fa fa-users",
             "props": {
                 "teamMembers": {
                     "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToManySelectEiProp",
