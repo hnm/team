@@ -153,7 +153,7 @@
                 "description": {
                     "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
                     "props": {
-                        "displayInOverview": true,
+                        "displayInOverview": false,
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
