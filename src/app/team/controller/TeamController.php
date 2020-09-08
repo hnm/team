@@ -6,9 +6,6 @@ use n2n\web\http\controller\ControllerAdapter;
 use n2n\web\http\PageNotFoundException;
 use n2n\reflection\annotation\AnnoInit;
 use n2n\web\http\annotation\AnnoPath;
-use n2n\reflection\ArgUtils;
-use team\bo\TeamMember;
-use team\bo\Team;
 
 class TeamController extends ControllerAdapter {
 	private static function _annos(AnnoInit $ai) {

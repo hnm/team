@@ -45,4 +45,12 @@ class TeamDao implements RequestScoped {
 		return $this->em->createNqlCriteria('SELECT m FROM team\bo\TeamMember t 
 				WHERE t.id = :id AND t.online = :online', array('id' => $id, 'online' => true))->toQuery()->fetchSingle();
 	}
+	
+	/**
+	 * @param string $pathPart
+	 * @return TeamMember
+	 */
+	public function getMemberByPathPart(string $pathPart) {
+		return $this->em->createSimpleCriteria(TeamMember::getClass(), ['pathPart' => $pathPart], null, 1)->toQuery()->fetchSingle();
+	}
 }

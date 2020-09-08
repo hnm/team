@@ -36,7 +36,7 @@ use n2n\impl\web\ui\view\html\img\Mimg;
 				<dl>
 					<dt><?php $html->text('member_phone') ?></dt>
 					<dd>
-						<?php $html->link($tmplHtml->getPhoneUrl($phone), $phone) ?>
+						<?php $html->link(TeamMember::formatPhoneLink($phone), $phone) ?>
 					</dd>
 				</dl>
 			<?php endif ?>

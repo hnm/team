@@ -1,15 +1,4 @@
 {
-    "team\\bo\\TeamMemberPageController": {
-        "teamMembers": {
-            "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\relation\\ManyToManyPropDef",
-            "props": {
-                "targetEntityClass": "team\\bo\\TeamMember",
-                "mappedBy": null,
-                "cascadeType": [],
-                "fetchType": "lazy"
-            }
-        }
-    },
     "team\\bo\\Holeradio": {
         "id": {
             "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\scalar\\IntegerPropDef",
@@ -66,7 +55,21 @@
                 "charset": null
             }
         },
+        "pathPart": {
+            "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\scalar\\StringPropDef",
+            "props": {
+                "length": "255",
+                "charset": null
+            }
+        },
         "phone": {
+            "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\scalar\\StringPropDef",
+            "props": {
+                "length": "255",
+                "charset": null
+            }
+        },
+        "mobile": {
             "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\scalar\\StringPropDef",
             "props": {
                 "length": "255",
@@ -89,7 +92,7 @@
         "online": {
             "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\scalar\\BooleanPropDef",
             "props": {
-                "required": false
+                "required": true
             }
         },
         "teamMemberTs": {
@@ -113,7 +116,9 @@
             "props": {
                 "targetEntityClass": "team\\bo\\Team",
                 "mappedBy": null,
-                "cascadeType": [],
+                "cascadeType": {
+                    "1": "1"
+                },
                 "fetchType": "lazy"
             }
         }
@@ -121,6 +126,54 @@
     "team\\bo\\CiTeamMember": {
         "teamMember": {
             "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\relation\\ManyToOnePropDef",
+            "props": {
+                "targetEntityClass": "team\\bo\\TeamMember",
+                "mappedBy": null,
+                "cascadeType": [],
+                "fetchType": "lazy"
+            }
+        }
+    },
+    "team\\bo\\TeamMemberT": {
+        "id": {
+            "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\scalar\\IntegerPropDef",
+            "props": {
+                "size": "32",
+                "signed": true
+            }
+        },
+        "n2nLocale": {
+            "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\N2nLocalePropDef",
+            "props": {
+                "required": true
+            }
+        },
+        "teamMember": {
+            "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\relation\\ManyToOnePropDef",
+            "props": {
+                "targetEntityClass": "team\\bo\\TeamMember",
+                "cascadeType": [],
+                "fetchType": "lazy"
+            }
+        },
+        "function": {
+            "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\scalar\\StringPropDef",
+            "props": {
+                "length": "255",
+                "charset": null
+            }
+        },
+        "descriptionHtml": {
+            "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\scalar\\TextPropDef",
+            "props": {
+                "size": "524280",
+                "charset": null
+            }
+        }
+    },
+    "team\\bo\\TeamMemberPageController": {
+        "teamMembers": {
+            "prop-def": "n2n\\impl\\persistence\\orm\\property\\hangar\\relation\\ManyToManyPropDef",
             "props": {
                 "targetEntityClass": "team\\bo\\TeamMember",
                 "mappedBy": null,

@@ -288,6 +288,25 @@
                     "objectProperty": "email",
                     "entityProperty": "email"
                 },
+                "pathPart": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\PathPartEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": true,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": false,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "basePropertyFieldId": "lastName",
+                        "allowEmpty": false,
+                        "critical": false
+                    },
+                    "label": "Path Part",
+                    "objectProperty": "pathPart",
+                    "entityProperty": "pathPart"
+                },
                 "phone": {
                     "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
                     "props": {
@@ -305,6 +324,24 @@
                     "label": "Telefon",
                     "objectProperty": "phone",
                     "entityProperty": "phone"
+                },
+                "mobile": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "multiline": false
+                    },
+                    "label": "Mobile",
+                    "objectProperty": "mobile",
+                    "entityProperty": "mobile"
                 },
                 "orderIndex": {
                     "class": "rocket\\impl\\ei\\component\\prop\\numeric\\OrderEiProp",
@@ -405,7 +442,9 @@
                 },
                 "addEiCommand": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\AddEiCommand",
-                    "props": []
+                    "props": {
+                        "duplicateAllowed": true
+                    }
                 },
                 "deleteEiCommand": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\DeleteEiCommand",
@@ -423,6 +462,12 @@
             "label": "Team Member T",
             "pluralLabel": "Team Member Ts",
             "iconType": null,
+            "filterData": {
+                "useAnd": true,
+                "items": [],
+                "groups": []
+            },
+            "defaultSort": [],
             "props": {
                 "function": {
                     "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
@@ -441,6 +486,26 @@
                     "label": "Funktion",
                     "objectProperty": "function",
                     "entityProperty": "function"
+                },
+                "descriptionHtml": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\cke\\CkeEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "mode": "simple",
+                        "linkProviders": [],
+                        "tablesSupported": false,
+                        "bbcode": false
+                    },
+                    "label": "Description",
+                    "objectProperty": "descriptionHtml",
+                    "entityProperty": "descriptionHtml"
                 }
             },
             "commands": {
@@ -454,7 +519,9 @@
                 },
                 "addEiCommand": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\AddEiCommand",
-                    "props": []
+                    "props": {
+                        "duplicateAllowed": true
+                    }
                 },
                 "overviewEiCommand": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\OverviewEiCommand",
@@ -474,7 +541,34 @@
             "label": "Team-Seite",
             "pluralLabel": "Team-Seiten",
             "iconType": "fa fa-users",
-            "props": [],
+            "filterData": {
+                "useAnd": true,
+                "items": [],
+                "groups": []
+            },
+            "defaultSort": [],
+            "props": {
+                "teams": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToManySelectEiProp",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "draftable": false,
+                        "targetExtensions": [],
+                        "targetRemovalStrategy": "prevent",
+                        "embeddedAddEnabled": false,
+                        "filtered": true,
+                        "hiddenIfTargetEmpty": false
+                    },
+                    "label": "Teams",
+                    "objectProperty": "teams",
+                    "entityProperty": "teams"
+                }
+            },
             "commands": [],
             "partialControlOrder": [],
             "overallControlOrder": [],
@@ -487,6 +581,12 @@
             "label": "Mitarbeiter-Seite",
             "pluralLabel": "Mitarbeiter-Seite",
             "iconType": "fa fa-users",
+            "filterData": {
+                "useAnd": true,
+                "items": [],
+                "groups": []
+            },
+            "defaultSort": [],
             "props": {
                 "teamMembers": {
                     "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToManySelectEiProp",
@@ -521,6 +621,12 @@
             "label": "Mitarbeiter",
             "pluralLabel": "Mitarbeiter",
             "iconType": null,
+            "filterData": {
+                "useAnd": true,
+                "items": [],
+                "groups": []
+            },
+            "defaultSort": [],
             "props": {
                 "teamMember": {
                     "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToOneSelectEiProp",
@@ -534,7 +640,7 @@
                         "mandatory": true,
                         "draftable": false,
                         "targetExtensions": [],
-                        "targetRemovalStrategy": "prevent",
+                        "targetRemovalStrategy": "selfRemove",
                         "embeddedAddEnabled": false,
                         "filtered": true,
                         "hiddenIfTargetEmpty": false

@@ -1,9 +1,8 @@
 <?php 
 	use n2n\impl\web\ui\view\html\HtmlView;
 	use n2n\impl\web\ui\view\html\img\Mimg;
-use team\bo\TeamMember;
-use n2n\web\http\nav\Murl;
-use bstmpl\ui\TemplateHtmlBuilder;
+	use team\bo\TeamMember;
+	use n2n\web\http\nav\Murl;
 	
 	$view = HtmlView::view($view);
 	$html = HtmlView::html($view);
@@ -11,7 +10,6 @@ use bstmpl\ui\TemplateHtmlBuilder;
 	$detailLinkAvailable = $view->getParam('detailLinkAvailable', false, false);
 	$teamMembers = $view->getParam('teamMembers');
 	
-	$tmplHtml = new TemplateHtmlBuilder($view);
 ?>
 <div class="row">
 	<?php foreach ($teamMembers as $teamMember): $view->assert($teamMember instanceof TeamMember) ?>
@@ -31,7 +29,7 @@ use bstmpl\ui\TemplateHtmlBuilder;
 			<?php if (null !== $phone = $teamMember->getPhone()): ?>
 				<dl>
 					<dt><?php $html->text('member_phone') ?></dt>
-					<dd><?php $html->link($tmplHtml->getPhoneUrl($phone), $phone) ?></dd>
+					<dd><?php $html->link(TeamMember::formatPhoneLink($phone), $phone) ?></dd>
 				</dl>
 			<?php endif ?>
 			
