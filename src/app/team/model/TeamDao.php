@@ -5,6 +5,7 @@ use n2n\persistence\orm\EntityManager;
 use team\bo\Team;
 use n2n\context\RequestScoped;
 use team\bo\TeamMember;
+use team\bo\Location;
 
 class TeamDao implements RequestScoped {
 	private $em;
@@ -52,5 +53,12 @@ class TeamDao implements RequestScoped {
 	 */
 	public function getMemberByPathPart(string $pathPart) {
 		return $this->em->createSimpleCriteria(TeamMember::getClass(), ['pathPart' => $pathPart], null, 1)->toQuery()->fetchSingle();
+	}
+	
+	/**
+	 * @return Location[]
+	 */
+	public function getLocations() {
+		return $this->em->createSimpleCriteria(Location::getClass(), null, ['orderIndex' => 'ASC'])->toQuery()->fetchArray();
 	}
 }

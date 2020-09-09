@@ -1,5 +1,5 @@
 <?php
-namespace team\bo;
+namespace team\ci;
 
 use n2n\impl\web\ui\view\html\HtmlView;
 use rocket\impl\ei\component\prop\ci\model\ContentItem;
@@ -7,8 +7,8 @@ use n2n\web\http\orm\ResponseCacheClearer;
 use n2n\persistence\orm\annotation\AnnoTable;
 use n2n\persistence\orm\annotation\AnnoEntityListeners;
 use n2n\reflection\annotation\AnnoInit;
-use team\bo\TeamMember;
 use n2n\persistence\orm\annotation\AnnoManyToOne;
+use team\bo\TeamMember;
 
 class CiTeamMember extends ContentItem {
 	private static function _annos(AnnoInit $ai) {

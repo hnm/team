@@ -32,20 +32,22 @@
 	<?php endif ?>
 	
 	<dl class="row">
-		<?php if (null !== $phone = $member->getPhone()): ?>
+		<?php if (null !== $phone = $member->getPhoneOfMemberOrLocation()): ?>
 			<dt class="col-sm-3 col-lg-2"><?php $html->text('member_phone') ?>:</dt>
-			<dd class="col-sm-9 col-lg-10"><?php $html->out($phone)?></dd>
+			<dd class="col-sm-9 col-lg-10"><?php $html->link('tel:' . TeamMember::formatPhoneLink($phone), $phone)?></dd>
 		<?php endif ?>
 		<?php if (null !== $mobile = $member->getMobile()): ?>
 			<dt class="col-sm-3 col-lg-2"><?php $html->text('member_mobile') ?>:</dt>
 			<dd class="col-sm-9 col-lg-10"><?php $html->out($mobile)?></dd>
 		<?php endif ?>
-		<?php if (null !== $email = $member->getEmail()): ?>
+		<?php if (null !== $email = $member->getEmailOfMemberOrLocation()): ?>
 			<dt class="col-sm-3 col-lg-2">E-Mail:</dt>
 			<dd class="col-sm-9 col-lg-10"><?php $html->linkEmail($email)?></dd>
 		<?php endif ?>
+		<?php if (null != $location = $member->getLocation()): ?>
 		<dt class="col-sm-3 col-lg-2"><?php $html->text('member_address')?></dt>
-		<dd class="col-sm-9 col-lg-10">Hofmänner New Media GmbH<br />Stadthausstrasse 65<br />8400 Winterthur</dd>
+		<dd class="col-sm-9 col-lg-10"><?php $html->escBr($location->getAddressStr()) ?></dd>
+		<?php endif ?>
 	</dl>
 	
 	<?php $html->linkToController(['vcard', $member->getPathPart(), $member->getCode()], 'Karte herunterladen', ['class' => 'btn btn-primary'])?>

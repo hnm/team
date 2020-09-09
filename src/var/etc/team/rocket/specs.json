@@ -244,6 +244,35 @@
                     "objectProperty": "lastName",
                     "entityProperty": "lastName"
                 },
+                "teamMemberTs": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\translation\\TranslationEiProp",
+                    "props": {
+                        "draftable": false,
+                        "useSystemN2nLocales": true,
+                        "systenN2nLocaleDefs": [
+                            {
+                                "id": "en",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "de_CH",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "fr_CH",
+                                "mandatory": false,
+                                "label": null
+                            }
+                        ],
+                        "customN2nLocaleDefs": [],
+                        "min": "1"
+                    },
+                    "label": "Team Member Ts",
+                    "objectProperty": "teamMemberTs",
+                    "entityProperty": "teamMemberTs"
+                },
                 "fileImage": {
                     "class": "rocket\\impl\\ei\\component\\prop\\file\\FileEiProp",
                     "props": {
@@ -361,48 +390,26 @@
                     "objectProperty": "orderIndex",
                     "entityProperty": "orderIndex"
                 },
-                "online": {
-                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\OnlineEiProp",
+                "location": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToOneSelectEiProp",
                     "props": {
-                        "displayInOverview": false,
+                        "displayInOverview": true,
                         "displayInDetailView": true,
-                        "displayInEditView": false,
-                        "displayInAddView": false,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
                         "readOnly": false,
-                        "draftable": false
-                    },
-                    "label": "Online",
-                    "objectProperty": "online",
-                    "entityProperty": "online"
-                },
-                "teamMemberTs": {
-                    "class": "rocket\\impl\\ei\\component\\prop\\translation\\TranslationEiProp",
-                    "props": {
+                        "mandatory": true,
                         "draftable": false,
-                        "useSystemN2nLocales": true,
-                        "systenN2nLocaleDefs": [
-                            {
-                                "id": "en",
-                                "mandatory": false,
-                                "label": null
-                            },
-                            {
-                                "id": "de_CH",
-                                "mandatory": false,
-                                "label": null
-                            },
-                            {
-                                "id": "fr_CH",
-                                "mandatory": false,
-                                "label": null
-                            }
-                        ],
-                        "customN2nLocaleDefs": [],
-                        "min": "1"
+                        "targetExtensions": [],
+                        "targetRemovalStrategy": "prevent",
+                        "embeddedAddEnabled": false,
+                        "filtered": true,
+                        "hiddenIfTargetEmpty": false
                     },
-                    "label": "Team Member Ts",
-                    "objectProperty": "teamMemberTs",
-                    "entityProperty": "teamMemberTs"
+                    "label": "Location",
+                    "objectProperty": "location",
+                    "entityProperty": "location"
                 },
                 "teams": {
                     "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToManySelectEiProp",
@@ -423,6 +430,20 @@
                     "label": "Teams",
                     "objectProperty": "teams",
                     "entityProperty": "teams"
+                },
+                "online": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\OnlineEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "readOnly": false,
+                        "draftable": false
+                    },
+                    "label": "Online",
+                    "objectProperty": "online",
+                    "entityProperty": "online"
                 }
             },
             "commands": {
@@ -616,7 +637,7 @@
         },
         "team-ci-team-member": {
             "nature": "entity",
-            "entity": "team\\bo\\CiTeamMember",
+            "entity": "team\\ci\\CiTeamMember",
             "dataSourceName": null,
             "label": "Mitarbeiter",
             "pluralLabel": "Mitarbeiter",
@@ -654,11 +675,260 @@
             "partialControlOrder": [],
             "overallControlOrder": [],
             "entryControlOrder": []
+        },
+        "team-location": {
+            "nature": "entity",
+            "entity": "team\\bo\\Location",
+            "dataSourceName": null,
+            "label": "Location",
+            "pluralLabel": "Locations",
+            "iconType": "fa fa-home",
+            "identityStringPattern": "{city}, {country}",
+            "filterData": {
+                "useAnd": true,
+                "items": [],
+                "groups": []
+            },
+            "defaultSort": [],
+            "props": {
+                "name": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "multiline": false
+                    },
+                    "label": "Name",
+                    "objectProperty": "name",
+                    "entityProperty": "name"
+                },
+                "street": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "multiline": false
+                    },
+                    "label": "Street",
+                    "objectProperty": "street",
+                    "entityProperty": "street"
+                },
+                "zip": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "multiline": false
+                    },
+                    "label": "Zip",
+                    "objectProperty": "zip",
+                    "entityProperty": "zip"
+                },
+                "city": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "multiline": false
+                    },
+                    "label": "City",
+                    "objectProperty": "city",
+                    "entityProperty": "city"
+                },
+                "country": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "multiline": false
+                    },
+                    "label": "Country",
+                    "objectProperty": "country",
+                    "entityProperty": "country"
+                },
+                "phone": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "multiline": false
+                    },
+                    "label": "Phone",
+                    "objectProperty": "phone",
+                    "entityProperty": "phone"
+                },
+                "email": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "multiline": false
+                    },
+                    "label": "Email",
+                    "objectProperty": "email",
+                    "entityProperty": "email"
+                },
+                "homepage": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\UrlEiProp",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "relativeAllowed": false,
+                        "allowedProtocols": [],
+                        "autoScheme": "http"
+                    },
+                    "label": "Homepage",
+                    "objectProperty": "homepage",
+                    "entityProperty": "homepage"
+                },
+                "teamMembers": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\OneToManySelectEiProp",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": true,
+                        "draftable": false,
+                        "targetExtensions": [],
+                        "embeddedAddEnabled": false,
+                        "filtered": true,
+                        "hiddenIfTargetEmpty": false
+                    },
+                    "label": "Team Members",
+                    "objectProperty": "teamMembers",
+                    "entityProperty": "teamMembers"
+                },
+                "orderIndex": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\numeric\\OrderEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "minValue": "-2147483648",
+                        "maxValue": "2147483647"
+                    },
+                    "label": "Order Index",
+                    "objectProperty": "orderIndex",
+                    "entityProperty": "orderIndex"
+                }
+            },
+            "commands": {
+                "overviewEiCommand": {
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\OverviewEiCommand",
+                    "props": {
+                        "pageSize": "30"
+                    }
+                },
+                "detailEiCommand": {
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\DetailEiCommand",
+                    "props": []
+                },
+                "editEiCommand": {
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\EditEiCommand",
+                    "props": []
+                },
+                "addEiCommand": {
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\AddEiCommand",
+                    "props": {
+                        "duplicateAllowed": true
+                    }
+                },
+                "deleteEiCommand": {
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\DeleteEiCommand",
+                    "props": []
+                }
+            },
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
+        },
+        "team-location-page-controller": {
+            "nature": "entity",
+            "entity": "team\\bo\\LocationPageController",
+            "dataSourceName": null,
+            "label": "Standort Seite",
+            "pluralLabel": "Standort Seiten",
+            "iconType": null,
+            "filterData": {
+                "useAnd": true,
+                "items": [],
+                "groups": []
+            },
+            "defaultSort": [],
+            "props": [],
+            "commands": [],
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         }
     },
     "eiTypeExtensions": [],
     "launchPads": {
         "team-team": [],
-        "team-team-member": []
+        "team-team-member": [],
+        "team-location": []
     }
 }

@@ -1,5 +1,5 @@
 -- Mysql Backup of mdl_team
--- Date 2020-09-08T20:10:52+02:00
+-- Date 2020-09-09T09:55:59+02:00
 -- Backup by 
 
 DROP TABLE IF EXISTS `bstmpl_contact_page_controller`;
@@ -46,10 +46,11 @@ CREATE TABLE `page` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
 
 INSERT INTO `page` (`id`, `internal_page_id`, `external_url`, `page_content_id`, `subsystem_name`, `online`, `in_path`, `hook_key`, `in_navigation`, `nav_target_new_window`, `lft`, `rgt`, `last_mod`, `last_mod_by`, `indexable`) 
-VALUES ( '1',  NULL,  NULL,  '1',  NULL,  '1',  '1',  NULL,  '1',  '0',  '1',  '8',  '2020-09-08 20:03:27',  NULL,  '1'),
+VALUES ( '1',  NULL,  NULL,  '1',  NULL,  '1',  '1',  NULL,  '1',  '0',  '1',  '10',  '2020-09-09 09:32:59',  NULL,  '1'),
 ( '2', NULL, NULL, '2', NULL, '1', '1', NULL, '1', '0', '4', '5', '2020-09-08 20:03:27', NULL, '1'),
 ( '3', NULL, NULL, '3', NULL, '1', '1', NULL, '1', '0', '2', '3', '2020-09-08 19:56:42', NULL, '1'),
-( '4', NULL, NULL, '4', NULL, '1', '1', NULL, '1', '0', '6', '7', '2020-09-08 20:03:27', NULL, '1');
+( '4', NULL, NULL, '4', NULL, '1', '1', NULL, '1', '0', '6', '7', '2020-09-08 20:03:27', NULL, '1'),
+( '5', NULL, NULL, '5', NULL, '1', '1', NULL, '1', '0', '8', '9', '2020-09-09 09:32:59', NULL, '1');
 
 DROP TABLE IF EXISTS `page_content`;
 CREATE TABLE `page_content` ( 
@@ -65,7 +66,8 @@ INSERT INTO `page_content` (`id`, `subsystem_name`, `page_controller_id`, `page_
 VALUES ( '1',  NULL,  '1',  NULL,  '0'),
 ( '2', NULL, '2', NULL, '0'),
 ( '3', NULL, '3', NULL, '0'),
-( '4', NULL, '4', NULL, '0');
+( '4', NULL, '4', NULL, '0'),
+( '5', NULL, '6', NULL, '0');
 
 DROP TABLE IF EXISTS `page_content_t`;
 CREATE TABLE `page_content_t` ( 
@@ -83,7 +85,8 @@ INSERT INTO `page_content_t` (`id`, `n2n_locale`, `se_title`, `se_description`, 
 VALUES ( '1',  'de_CH',  NULL,  NULL,  NULL,  '1'),
 ( '2', 'de_CH', NULL, NULL, NULL, '2'),
 ( '3', 'en', NULL, NULL, NULL, '3'),
-( '4', 'en', NULL, NULL, NULL, '4');
+( '4', 'en', NULL, NULL, NULL, '4'),
+( '5', 'en', NULL, NULL, NULL, '5');
 
 DROP TABLE IF EXISTS `page_controller`;
 CREATE TABLE `page_controller` ( 
@@ -96,7 +99,8 @@ INSERT INTO `page_controller` (`id`, `method_name`)
 VALUES ( '1',  'teams'),
 ( '2', 'teams'),
 ( '3', 'employees'),
-( '4', 'default');
+( '4', 'default'),
+( '6', 'locationPage');
 
 DROP TABLE IF EXISTS `page_controller_t`;
 CREATE TABLE `page_controller_t` ( 
@@ -114,7 +118,8 @@ VALUES ( '1',  'de_CH',  '1'),
 ( '4', 'en', '2'),
 ( '5', 'en', '3'),
 ( '7', 'de_CH', '4'),
-( '6', 'en', '4');
+( '6', 'en', '4'),
+( '9', 'en', '6');
 
 DROP TABLE IF EXISTS `page_controller_t_content_items`;
 CREATE TABLE `page_controller_t_content_items` ( 
@@ -163,7 +168,9 @@ VALUES ( '1',  'de_CH',  'Alle Teams',  NULL,  NULL,  '1',  '1'),
 ( '5', 'en', 'Teammembers', NULL, 'teammembers', '3', '1'),
 ( '6', 'de_CH', 'Teammitglieder', NULL, 'teammitglieder', '3', '1'),
 ( '7', 'en', 'Content Item Example', NULL, 'content-item-example', '4', '1'),
-( '8', 'de_CH', 'Content Item Beispiel', NULL, 'content-item-beispiel', '4', '1');
+( '8', 'de_CH', 'Content Item Beispiel', NULL, 'content-item-beispiel', '4', '1'),
+( '9', 'en', 'Locations', NULL, 'locations', '5', '1'),
+( '10', 'de_CH', 'Standorte', NULL, 'standorte', '5', '1');
 
 DROP TABLE IF EXISTS `rocket_content_item`;
 CREATE TABLE `rocket_content_item` ( 
@@ -324,6 +331,34 @@ CREATE TABLE `team_controller_page_config_teams` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
 
 
+DROP TABLE IF EXISTS `team_location`;
+CREATE TABLE `team_location` ( 
+	`id` INT NOT NULL AUTO_INCREMENT, 
+	`name` VARCHAR(255) NULL DEFAULT NULL, 
+	`street` VARCHAR(255) NULL DEFAULT NULL, 
+	`zip` VARCHAR(255) NULL DEFAULT NULL, 
+	`city` VARCHAR(255) NULL DEFAULT NULL, 
+	`country` VARCHAR(255) NULL DEFAULT NULL, 
+	`phone` VARCHAR(255) NULL DEFAULT NULL, 
+	`email` VARCHAR(255) NULL DEFAULT NULL, 
+	`homepage` VARCHAR(255) NULL DEFAULT NULL, 
+	`order_index` INT NULL DEFAULT NULL, 
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci ;
+
+INSERT INTO `team_location` (`id`, `name`, `street`, `zip`, `city`, `country`, `phone`, `email`, `homepage`, `order_index`) 
+VALUES ( '1',  'Hofmänner New Media',  'Stadthausstrasse 65',  '8400',  'Winterthur',  'Schweiz',  '052 233 79 77',  'info@hnm.ch',  'https://www.hnm.ch',  '10'),
+( '2', 'Tomsquared', NULL, NULL, 'Konstanz', 'Deutschland', '052 233 79 77', 'info@tomsquared.de', 'https://www.tomsquared.de', '20');
+
+DROP TABLE IF EXISTS `team_location_page_controller`;
+CREATE TABLE `team_location_page_controller` ( 
+	`id` INT NOT NULL, 
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci ;
+
+INSERT INTO `team_location_page_controller` (`id`) 
+VALUES ( '6');
+
 DROP TABLE IF EXISTS `team_member`;
 CREATE TABLE `team_member` ( 
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
@@ -336,12 +371,14 @@ CREATE TABLE `team_member` (
 	`online` TINYINT UNSIGNED NULL DEFAULT NULL, 
 	`path_part` VARCHAR(255) NULL DEFAULT NULL, 
 	`mobile` VARCHAR(255) NULL DEFAULT NULL, 
+	`location_id` INT NULL DEFAULT NULL, 
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+ALTER TABLE `team_member` ADD INDEX `team_member_index_1` (`location_id`);
 
-INSERT INTO `team_member` (`id`, `first_name`, `last_name`, `email`, `phone`, `file_image`, `order_index`, `online`, `path_part`, `mobile`) 
-VALUES ( '1',  'Thomas',  'Günther',  NULL,  NULL,  NULL,  '10',  '1',  'thomas-guenther',  NULL),
-( '2', 'Bert', 'Hofmänner', 'bert@hnm.ch', '052 233 79 77', NULL, '20', '1', 'hofmaenner', '079 111 11 11');
+INSERT INTO `team_member` (`id`, `first_name`, `last_name`, `email`, `phone`, `file_image`, `order_index`, `online`, `path_part`, `mobile`, `location_id`) 
+VALUES ( '1',  'Thomas',  'Günther',  NULL,  NULL,  NULL,  '10',  '1',  'thomas-guenther',  NULL,  '2'),
+( '2', 'Bert', 'Hofmänner', 'bert@hnm.ch', '052 233 79 77', NULL, '20', '1', 'hofmaenner', '079 111 11 11', '1');
 
 DROP TABLE IF EXISTS `team_member_page_controller`;
 CREATE TABLE `team_member_page_controller` ( 

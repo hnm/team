@@ -11,12 +11,14 @@ use n2n\io\managed\File;
 use n2n\persistence\orm\annotation\AnnoManagedFile;
 use n2n\core\N2N;
 use JeroenDesloovere\VCard\VCard;
+use n2n\persistence\orm\annotation\AnnoManyToOne;
 
 class TeamMember extends ObjectAdapter {
 	private static function _annos(AnnoInit $ai) {
 		$ai->p('fileImage', new AnnoManagedFile());
 		$ai->p('teamMemberTs', new AnnoOneToMany(TeamMemberT::getClass(), 'teamMember', \n2n\persistence\orm\CascadeType::ALL, null, true));
 		$ai->p('teams', new AnnoManyToMany(Team::getClass(), null, \n2n\persistence\orm\CascadeType::PERSIST));
+		$ai->p('location', new AnnoManyToOne(Location::getClass()));
 	}
 
 	const COMPANY_NAME = 'Hofmänner New Media';
@@ -25,19 +27,20 @@ class TeamMember extends ObjectAdapter {
 	const COMPANY_CITY = 'Winterthur';
 	const COMPANY_COUNTRY = 'Schweiz';
 	const COMPANY_WEBSITE = 'https://www.hnm.ch';
-	
+
 	private $id;
 	private $firstName;
 	private $lastName;
+	private $teamMemberTs;
 	private $email;
 	private $pathPart;
 	private $phone;
 	private $mobile;
 	private $fileImage;
+	private $location;
+	private $teams;
 	private $orderIndex;
 	private $online = true;
-	private $teamMemberTs;
-	private $teams;
 
 	/**
 	 * @param N2nLocale ...$n2nLocales
@@ -204,41 +207,70 @@ class TeamMember extends ObjectAdapter {
 	public function setMobile(string $mobile = null) {
 		$this->mobile = $mobile;
 	}
-	
+
 	/**
 	 * @return \JeroenDesloovere\VCard\VCard
 	 */
 	public function getVcard(N2nLocale $locale) {
 		$vcard = new VCard();
 		$vcard->addName($this->getLastname(), $this->getFirstname());
-		$vcard->addCompany(self::COMPANY_NAME);
 		$vcard->addJobtitle($this->t($locale)->getFunction());
-		$vcard->addEmail($this->getEmail());
-		
-		if (null !== $phone = $this->getPhone()) {
+		if (null != $email = $this->getEmailOfMemberOrLocation()) {
+			$vcard->addEmail($email);
+		}
+		if (null !== $phone = $this->getPhoneOfMemberOrLocation()) {
 			$vcard->addPhoneNumber(TeamMember::formatPhoneLink($phone), 'WORK');
 		}
-		
 		if (null !== $mobile = $this->getMobile()) {
 			$vcard->addPhoneNumber(TeamMember::formatPhoneLink($mobile), 'CELL');
 		}
 		
-		$vcard->addAddress(null, null, self::COMPANY_STREET, self::COMPANY_CITY, 'ZH', self::COMPANY_ZIP, self::COMPANY_COUNTRY);
-		$vcard->addURL(self::COMPANY_WEBSITE);
+		if (null !== $location = $this->getLocation()) {
+			$vcard->addCompany($location->getName());
+			$vcard->addAddress(null, null, $location->getStreet(), $location->getCity(), null, $location->getZip(), $location->getCountry());
+			$vcard->addURL($location->getHomepage());
+		}
 		
 		// 		if (null !== $foto = $this->getFileImage()) {
 		// 			$vcard->addPhoto($this->getRequest()->getHostUrl() . $foto->toUrl()->__toString());
 		// 		}
 		
 		return $vcard;
-		
 	}
-	
+
 	public static function formatPhoneLink($phone) {
 		$phone = str_replace(' ', '', $phone);
 		if (substr($phone, 0, 1) == '0') {
 			$phone = '+41' . substr($phone, 1, strlen($phone) - 1);
 		}
 		return $phone;
+	}
+
+	public function getLocation() {
+		return $this->location;
+	}
+
+	public function setLocation(Location $location) {
+		$this->location = $location;
+	}
+	
+	public function getPhoneOfMemberOrLocation() {
+		if ($this->phone) {
+			return $this->phone;
+		}
+		if (!$this->location) {
+			return null;
+		}
+		return $this->location->getPhone();
+	}
+	
+	public function getEmailOfMemberOrLocation() {
+		if ($this->email) {
+			return $this->email;
+		}
+		if (!$this->location) {
+			return null;
+		}
+		return $this->location->getEmail();
 	}
 }

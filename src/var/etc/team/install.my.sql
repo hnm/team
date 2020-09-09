@@ -32,6 +32,29 @@ CREATE TABLE `team_controller_page_config_teams` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
 
 
+DROP TABLE IF EXISTS `team_location`;
+CREATE TABLE `team_location` ( 
+	`id` INT NOT NULL AUTO_INCREMENT, 
+	`name` VARCHAR(255) NULL DEFAULT NULL, 
+	`street` VARCHAR(255) NULL DEFAULT NULL, 
+	`zip` VARCHAR(255) NULL DEFAULT NULL, 
+	`city` VARCHAR(255) NULL DEFAULT NULL, 
+	`country` VARCHAR(255) NULL DEFAULT NULL, 
+	`phone` VARCHAR(255) NULL DEFAULT NULL, 
+	`email` VARCHAR(255) NULL DEFAULT NULL, 
+	`homepage` VARCHAR(255) NULL DEFAULT NULL, 
+	`order_index` INT NULL DEFAULT NULL, 
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci ;
+
+
+DROP TABLE IF EXISTS `team_location_page_controller`;
+CREATE TABLE `team_location_page_controller` ( 
+	`id` INT NOT NULL, 
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci ;
+
+
 DROP TABLE IF EXISTS `team_member`;
 CREATE TABLE `team_member` ( 
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
@@ -44,8 +67,10 @@ CREATE TABLE `team_member` (
 	`online` TINYINT UNSIGNED NULL DEFAULT NULL, 
 	`path_part` VARCHAR(255) NULL DEFAULT NULL, 
 	`mobile` VARCHAR(255) NULL DEFAULT NULL, 
+	`location_id` INT NULL DEFAULT NULL, 
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+ALTER TABLE `team_member` ADD INDEX `team_member_index_1` (`location_id`);
 
 
 DROP TABLE IF EXISTS `team_member_page_controller`;
@@ -108,3 +133,4 @@ CREATE TABLE `team_t` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
 ALTER TABLE `team_t` ADD INDEX `team_t_index_1` (`team_id`);
+
