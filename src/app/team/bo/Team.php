@@ -9,9 +9,12 @@ use n2n\l10n\N2nLocale;
 use rocket\impl\ei\component\prop\translation\Translator;
 use n2n\persistence\orm\annotation\AnnoOneToMany;
 use n2n\persistence\orm\CascadeType;
+use n2n\persistence\orm\annotation\AnnoEntityListeners;
+use n2n\web\http\orm\ResponseCacheClearer;
 
 class Team extends ObjectAdapter {
 	private static function _annos(AnnoInit $ai) {
+		$ai->c(new AnnoEntityListeners(ResponseCacheClearer::getClass()));
 		$ai->p('teamMembers', new AnnoManyToMany(TeamMember::getClass(), 'teams', CascadeType::PERSIST), 
 				new AnnoOrderBy(array('orderIndex' => 'ASC')));
 		$ai->p('teamTs', new AnnoOneToMany(TeamT::getClass(), 'team', CascadeType::ALL, null, true));
