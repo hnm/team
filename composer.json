@@ -1,32 +1,34 @@
 {
-	"name" : "hnm/team",
-	"type" : "n2n-tmpl-module",
-	"description" : "Team module for n2n",
-	"keywords" : [
-		"n2n-tmpl-module",
-		"n2n-module",
-		"n2n"
-	],
-	"homepage" : "https://n2n.rocks/",
-	"license" : "MIT",
-	"authors" : [{
-			"name" : "Thomas Günther",
-			"email" : "guenther@hnm.ch"
-		},{
-			"name" : "Bert Hofmänner",
-			"email" : "hofmaenner@hnm.ch"
-		}
-	],
-	"require" : {
-		"php" : ">=7.0",
-		"n2n/n2n-composer-module-installer" : "dev-master",
-		"n2n/rocket" : "dev-master",
-		"n2n/page" : "dev-master",
-		"jeroendesloovere/vcard" : "^1.7"
-	},
-	"autoload" : {
-		"psr-4" : {
-			"team\\" : "src/app/team"
-		}
-	}
+    "name": "hnm/team",
+    "type": "n2n-tmpl-module",
+    "description": "Team module for n2n",
+    "keywords": [
+        "n2n-tmpl-module",
+        "n2n-module",
+        "n2n"
+    ],
+    "homepage": "https://n2n.rocks/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas G\u00fcnther",
+            "email": "guenther@hnm.ch"
+        },
+        {
+            "name": "Bert Hofm\u00e4nner",
+            "email": "hofmaenner@hnm.ch"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "n2n/n2n-composer-module-installer": "~7.1.2",
+        "n2n/rocket": "^2.0.13",
+        "n2n/page": "^1.5.12",
+        "jeroendesloovere/vcard": "^1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "team\\": "src/app/team"
+        }
+    }
 }
