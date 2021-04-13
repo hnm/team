@@ -21,7 +21,7 @@
 		"php" : ">=7.0",
 		"n2n/n2n-composer-module-installer" : "^7.1",
 		"n2n/rocket" : "^2.0.16 || ^3",
-		"n2n/page" : "^1.5.12"
+		"n2n/page" : "^1.5.12",
 		"jeroendesloovere/vcard" : "^1.7"
 	},
 	"autoload" : {
