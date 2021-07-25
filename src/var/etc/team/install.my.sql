@@ -5,7 +5,7 @@ CREATE TABLE `team` (
 	`order_index` INT UNSIGNED NULL DEFAULT NULL, 
 	`online` TINYINT UNSIGNED NULL DEFAULT NULL, 
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 
 
 DROP TABLE IF EXISTS `team_ci_team_member`;
@@ -13,7 +13,7 @@ CREATE TABLE `team_ci_team_member` (
 	`id` INT NOT NULL, 
 	`team_member_id` INT UNSIGNED NULL DEFAULT NULL, 
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 ALTER TABLE `team_ci_team_member` ADD INDEX `team_ci_team_member_index_1` (`team_member_id`);
 
 
@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS `team_controller_page_config`;
 CREATE TABLE `team_controller_page_config` ( 
 	`id` INT UNSIGNED NOT NULL, 
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 
 
 DROP TABLE IF EXISTS `team_controller_page_config_teams`;
@@ -29,7 +29,7 @@ CREATE TABLE `team_controller_page_config_teams` (
 	`team_controller_page_config_id` INT UNSIGNED NOT NULL, 
 	`team_id` INT UNSIGNED NOT NULL, 
 	PRIMARY KEY (`team_controller_page_config_id`, `team_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 
 
 DROP TABLE IF EXISTS `team_location`;
@@ -69,7 +69,7 @@ CREATE TABLE `team_member` (
 	`mobile` VARCHAR(255) NULL DEFAULT NULL, 
 	`location_id` INT NULL DEFAULT NULL, 
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 ALTER TABLE `team_member` ADD INDEX `team_member_index_1` (`location_id`);
 
 
@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `team_member_page_controller`;
 CREATE TABLE `team_member_page_controller` ( 
 	`id` INT NOT NULL, 
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 
 
 DROP TABLE IF EXISTS `team_member_page_controller_team_members`;
@@ -96,7 +96,7 @@ CREATE TABLE `team_member_t` (
 	`function` VARCHAR(255) NULL DEFAULT NULL, 
 	`description_html` TEXT NULL DEFAULT NULL, 
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 ALTER TABLE `team_member_t` ADD INDEX `team_member_t_index_1` (`team_member_id`);
 
 
@@ -112,7 +112,7 @@ DROP TABLE IF EXISTS `team_page_controller`;
 CREATE TABLE `team_page_controller` ( 
 	`id` INT NOT NULL, 
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 
 
 DROP TABLE IF EXISTS `team_page_controller_teams`;
@@ -120,7 +120,7 @@ CREATE TABLE `team_page_controller_teams` (
 	`team_page_controller_id` INT UNSIGNED NOT NULL, 
 	`team_id` INT UNSIGNED NOT NULL, 
 	PRIMARY KEY (`team_page_controller_id`, `team_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 
 
 DROP TABLE IF EXISTS `team_t`;
@@ -131,6 +131,6 @@ CREATE TABLE `team_t` (
 	`name` VARCHAR(255) NULL DEFAULT NULL, 
 	`description` TEXT NULL DEFAULT NULL, 
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci ;
 ALTER TABLE `team_t` ADD INDEX `team_t_index_1` (`team_id`);
 
